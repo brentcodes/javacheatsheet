@@ -54,7 +54,7 @@ public class Main {
             javaClasses.add(clazz.toString());
         }
 
-        javaClasses.set(0, String.join(" ", imports));
+        javaClasses.set(0, "\t\t" + String.join(" ", imports));
         final String fileOutput = String.join("\n\n", javaClasses);
         Files.write(
                 Paths.get("cheatsheets/" + dir.getName() + ".txt"),
