@@ -29,7 +29,7 @@ public class Main {
     }
 
     static File createCheatSheet(File dir) throws Exception {
-        System.out.println("\tCreating Cheatsheet for " + dir.getName());
+        System.out.println("\t Creating Cheatsheet for " + dir.getName());
         List<File> javaFiles = Stream.of(dir.listFiles())
                 .filter(file -> !file.isDirectory() && file.getName().endsWith(".java"))
                 .collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class Main {
                 }
                 clazz.append(line + "\t");
             });
-            javaClasses.add(clazz.toString());
+            javaClasses.add(clazz.toString().replace('\t',' ').replaceAll("\\s+", " "));
         }
 
         javaClasses.set(0, "\t\t" + String.join(" ", imports));
@@ -59,7 +59,7 @@ public class Main {
         Files.write(
                 Paths.get("cheatsheets/" + dir.getName() + ".txt"),
                 fileOutput.getBytes(StandardCharsets.UTF_8),
-                StandardOpenOption.CREATE
+                StandardOpenOption.TRUNCATE_EXISTING
         );
 
         return dir;
